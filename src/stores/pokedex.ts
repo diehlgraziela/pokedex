@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { fetchPokemons, fetchPokemonDetails } from '@/services/pokedex';
 import { ref } from 'vue';
-import type { IPokemonDetails, INameUrl } from '@/interfaces/pokedex.interface';
+import type { IPokemonDetails, INameUrl, TType } from '@/interfaces/pokedex.interface';
 
 export const usePokedexStore = defineStore('pokedex', () => {
   const allPokemons = ref<IPokemonDetails[]>([]);
