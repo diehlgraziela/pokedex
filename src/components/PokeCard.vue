@@ -16,7 +16,7 @@ defineProps<{
 
     <img class="image" :src="image" alt="Imagem pokémon" />
 
-    <h2>{{ name }}</h2>
+    <h2 class="name">{{ name }}</h2>
 
     <div class="types">
       <span
@@ -37,7 +37,7 @@ defineProps<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 
   width: 100%;
   height: 100%;
@@ -57,6 +57,10 @@ defineProps<{
 .image {
   width: 140px;
   height: 140px;
+}
+
+.name {
+  text-transform: capitalize;
 }
 
 .number {

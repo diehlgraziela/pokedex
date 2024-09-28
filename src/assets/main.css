@@ -2,9 +2,10 @@
 
 :root {
   --base-color: #e6e6e6;
-  --dark-color: #151515;
+  --dark-color: #1a1a1a;
   --light-color: #f2f2f2;
   --grey-color: #6b6b6b;
+  --grey-lighter-color: #a5a5a5;
   --dark-blue-color: #3c5aa6;
   --light-blue-color: #2a75bb;
   --yellow-color: #ffcb05;
@@ -60,7 +61,8 @@ h6 {
 p,
 a,
 span,
-button {
+button,
+input {
   font-size: 1rem;
 }
 small {
