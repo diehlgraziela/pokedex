@@ -13,7 +13,7 @@ function openDetails() {
 </script>
 
 <template>
-  <article class="list">
+  <div class="list">
     <PokeCard
       v-for="pokemon in pokedexStore.allPokemons"
       :key="pokemon.id"
@@ -23,9 +23,7 @@ function openDetails() {
       :types="pokemon.types"
       @click="openDetails"
     ></PokeCard>
-  </article>
-
-  <!-- <PokemonDetails v-if="showDetails" @click:close="showDetails = false" /> -->
+  </div>
 
   <Transition name="slide-fade">
     <PokemonDetails v-if="showDetails" @click:close="showDetails = false" />

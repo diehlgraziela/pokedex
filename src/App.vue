@@ -2,16 +2,18 @@
 import { RouterView } from 'vue-router';
 import { usePokedexStore } from './stores/pokedex';
 import { onMounted } from 'vue';
+import BaseHeader from './components/BaseHeader.vue';
 
 const pokedexStore = usePokedexStore();
 
 onMounted(() => {
-  console.log(pokedexStore.allPokemons);
   pokedexStore.getPokemonsList();
 });
 </script>
 
 <template>
+  <BaseHeader />
+
   <main>
     <RouterView />
   </main>

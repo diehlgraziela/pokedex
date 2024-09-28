@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="card">
+  <article class="card">
     <small class="number">Nº {{ number }}</small>
 
     <img class="image" :src="image" alt="Imagem pokémon" />
@@ -28,7 +28,7 @@ defineProps<{
         {{ type.type.name }}
       </span>
     </div>
-  </div>
+  </article>
 </template>
 
 <style scoped>
