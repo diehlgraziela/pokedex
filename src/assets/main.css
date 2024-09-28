@@ -13,9 +13,12 @@
   --border-radius-sm: 8px;
   --border-radius-md: 16px;
   --border-radius-lg: 24px;
+  --border-radius-xl: 32px;
+  --border-radius-rounded: 50%;
 
   --box-shadow-type-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --box-shadow-type-2: rgba(0, 0, 0, 0.05) 0px 15px 15px -6px, rgba(0, 0, 0, 0.02) 0px 4px 10px -2px;
+  --box-shadow-left: -5px 0px 10px -6px rgba(0, 0, 0, 0.2);
 
   --transition: 0.2s;
 }
