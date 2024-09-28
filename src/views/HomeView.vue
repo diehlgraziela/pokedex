@@ -7,8 +7,8 @@ const pokedexStore = usePokedexStore();
 
 <template>
   <section class="section">
-    <h1>Olá</h1>
-    <button @click="pokedexStore.getPokemonsList()">chamar</button>
+    <h1>Pokédex</h1>
+
     <PokeList />
   </section>
 </template>

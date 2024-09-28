@@ -147,5 +147,28 @@ interface IStats {
 
 export interface ITypes {
   slot: number;
-  type: INameUrl;
+  type: {
+    name: TType;
+    url: string;
+  };
 }
+
+export type TType =
+  | 'bug'
+  | 'dark'
+  | 'dragon'
+  | 'electric'
+  | 'fairy'
+  | 'fighting'
+  | 'fire'
+  | 'flying'
+  | 'ghost'
+  | 'grass'
+  | 'ground'
+  | 'ice'
+  | 'normal'
+  | 'poison'
+  | 'psychic'
+  | 'rock'
+  | 'steel'
+  | 'water';

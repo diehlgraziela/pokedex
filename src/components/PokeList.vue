@@ -22,6 +22,18 @@ const pokedexStore = usePokedexStore();
 .list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 2rem;
+}
+
+@media screen and (max-width: 960px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
