@@ -1,7 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { usePokedexStore } from '@/stores/pokedex';
+import PokeList from '@/components/PokeList.vue';
+
+const pokedexStore = usePokedexStore();
+</script>
 
 <template>
-  <section>
-    <h1>Olá, mundo!</h1>
+  <section class="section">
+    <h1>Olá</h1>
+    <button @click="pokedexStore.getPokemonsList()">chamar</button>
+    <PokeList />
   </section>
 </template>
