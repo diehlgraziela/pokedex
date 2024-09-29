@@ -5,8 +5,8 @@ import type { IEvolutionChain } from '@/interfaces/evolutions.interface';
 
 const baseUrl: string = 'https://pokeapi.co/api/v2';
 
-export const fetchPokemons = async (): Promise<AxiosResponse<IPokemonsResponse>> => {
-  return await axios.get(`${baseUrl}/pokemon?limit=12`);
+export const fetchPokemons = async (offset?: number): Promise<AxiosResponse<IPokemonsResponse>> => {
+  return await axios.get(`${baseUrl}/pokemon?limit=12&offset=${offset || 0}`);
 };
 
 export const fetchPokemonDetails = async (

@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { usePokedexStore } from '@/stores/pokedex';
 import PokeList from '@/components/PokeList.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import TypeFilter from '@/components/TypeFilter.vue';
-
-const pokedexStore = usePokedexStore();
 </script>
 
 <template>
-  <section class="section">
+  <section class="home-section">
     <div class="filters">
       <SearchInput />
       <TypeFilter />
@@ -19,6 +16,10 @@ const pokedexStore = usePokedexStore();
 </template>
 
 <style scoped>
+.home-section {
+  padding-bottom: 3rem;
+}
+
 .filters {
   display: flex;
   align-items: center;

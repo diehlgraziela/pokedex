@@ -13,9 +13,9 @@ export const usePokedexStore = defineStore('pokedex', () => {
   const allPokemons = ref<IPokemonDetails[]>([]);
   const evolutions = ref<IEvolutions>({} as IEvolutions);
 
-  async function getPokemonsList(): Promise<void> {
+  async function getPokemonsList(offset?: number): Promise<void> {
     try {
-      const response = await fetchPokemons();
+      const response = await fetchPokemons(offset);
 
       await getPokemonsDetailsList(response.data.results);
     } catch (error: any) {
