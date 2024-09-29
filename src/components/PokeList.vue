@@ -12,6 +12,8 @@ const selectedPokemon = ref<IPokemonDetails>({} as IPokemonDetails);
 function openDetails(pokemon: IPokemonDetails) {
   showDetails.value = true;
   selectedPokemon.value = pokemon;
+
+  pokedexStore.getPokemonEvolutions(pokemon.id);
 }
 </script>
 

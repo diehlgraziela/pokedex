@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { IPokemonDetails } from '@/interfaces/pokedex.interface';
+import { usePokedexStore } from '@/stores/pokedex';
 import { getTypeColor } from '@/utils/global';
 import PokemonTypes from './PokemonTypes.vue';
 
 defineProps<{
   pokemon: IPokemonDetails;
 }>();
+
+const pokedexStore = usePokedexStore();
 
 function getStatColor(value: number) {
   return value < 50 ? '#ff470f' : value <= 65 ? '#ffbf0f' : '#09db33';
@@ -40,14 +43,28 @@ function getStatColor(value: number) {
             <span class="stat-value text-end">{{ stat.base_stat }}</span>
             <div
               class="progress-bar"
-              :style="`width: ${stat.base_stat}%;background:${getStatColor(stat.base_stat)};height:4px;`"
+              :style="`
+              width: ${stat.base_stat}%;
+              background:${getStatColor(stat.base_stat)};
+              height:4px;
+              `"
             ></div>
           </li>
         </ul>
       </div>
 
       <div class="evolutions">
-        <h4>Evolução</h4>
+        <h4 class="text-center">Evoluções</h4>
+        <ul class="evolutions-list">
+          <li
+            v-for="evolution in pokedexStore.evolutions"
+            :key="evolution.name"
+            class="evolution-item"
+          >
+            <img class="evolution-image" :src="evolution.image" :alt="evolution.name" />
+            <small>{{ evolution.name }}</small>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -55,7 +72,7 @@ function getStatColor(value: number) {
 
 <style scoped>
 .drawer {
-  min-width: 40%;
+  width: 40%;
   height: 100vh;
   overflow: hidden;
 
@@ -113,7 +130,7 @@ function getStatColor(value: number) {
 
 .stats-item {
   display: grid;
-  grid-template-columns: 20% 10% 70%;
+  grid-template-columns: 20% 10% 60%;
   align-items: center;
   gap: 1rem;
 }
@@ -124,5 +141,22 @@ function getStatColor(value: number) {
 
 .stat-value {
   font-weight: 500;
+}
+
+.evolutions-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.evolution-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.evolution-image {
+  width: 80px;
+  height: 80px;
 }
 </style>
