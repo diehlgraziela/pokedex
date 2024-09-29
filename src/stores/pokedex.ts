@@ -7,7 +7,7 @@ import {
   fetchPokemonEvolutionChain,
 } from '@/services/pokedex';
 import type { IPokemonDetails, INameUrl } from '@/interfaces/pokedex.interface';
-import type { IEvolutions } from '@/interfaces/evolutions.interface';
+import type { IEvolutions, INameImage } from '@/interfaces/evolutions.interface';
 
 export const usePokedexStore = defineStore('pokedex', () => {
   const allPokemons = ref<IPokemonDetails[]>([]);
@@ -35,42 +35,35 @@ export const usePokedexStore = defineStore('pokedex', () => {
     }
   }
 
-  async function getPokemon(name: string): Promise<IPokemonDetails> {
+  async function getEvolutionData(name: string): Promise<INameImage> {
     try {
-      const response = await fetchPokemonDetails(name);
-
-      return response.data;
+      const pokemon = await fetchPokemonDetails(name);
+      return {
+        name: pokemon.data.name,
+        image: pokemon.data.sprites.other['official-artwork'].front_default,
+      };
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
   async function getPokemonEvolutions(id: number): Promise<void> {
-    //TODO - IMPROVE THIS FUNCTION LEGIBILITY
     try {
       const species = await fetchPokemonSpecies(id);
       const evolution = await fetchPokemonEvolutionChain(species.data.evolution_chain.url);
+      const chain = evolution.data.chain;
 
-      const firstEvolution = await getPokemon(evolution.data.chain.species.name);
-      const secondEvolution = await getPokemon(evolution.data.chain.evolves_to[0].species.name);
-      const thirdEvolution = await getPokemon(
-        evolution.data.chain.evolves_to[0].evolves_to[0].species.name,
-      );
+      evolutions.value.first_evolution = await getEvolutionData(chain.species.name);
 
-      evolutions.value = {
-        first_evolution: {
-          name: firstEvolution.name,
-          image: firstEvolution.sprites.other['official-artwork'].front_default,
-        },
-        second_evolution: {
-          name: secondEvolution.name,
-          image: secondEvolution.sprites.other['official-artwork'].front_default,
-        },
-        third_evolution: {
-          name: thirdEvolution.name,
-          image: thirdEvolution.sprites.other['official-artwork'].front_default,
-        },
-      };
+      if (chain.evolves_to.length > 0) {
+        const secondChain = chain.evolves_to[0];
+        evolutions.value.second_evolution = await getEvolutionData(secondChain.species.name);
+
+        if (secondChain.evolves_to.length > 0) {
+          const thirdChain = secondChain.evolves_to[0];
+          evolutions.value.third_evolution = await getEvolutionData(thirdChain.species.name);
+        }
+      }
     } catch (error: any) {
       throw new Error(error);
     }

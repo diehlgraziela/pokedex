@@ -48,7 +48,7 @@ export interface IEvolutions {
   third_evolution: INameImage;
 }
 
-interface INameImage {
+export interface INameImage {
   name: string;
   image: string;
 }
