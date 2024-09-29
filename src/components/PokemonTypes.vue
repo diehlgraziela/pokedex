@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import type { ITypes } from '@/interfaces/pokedex.interface';
+import { getTypeColor } from '@/utils/global';
+
+defineProps<{
+  types: ITypes[];
+}>();
+</script>
+
+<template>
+  <div class="types">
+    <span
+      v-for="type in types"
+      :key="type.type.name"
+      :style="`background: ${getTypeColor(type.type.name)}`"
+      class="type"
+    >
+      {{ type.type.name }}
+    </span>
+  </div>
+</template>
+
+<style scoped>
+.types {
+  display: flex;
+  gap: 8px;
+}
+
+.type {
+  color: var(--light-color);
+  border-radius: var(--border-radius-xs);
+  padding: 4px 8px;
+}
+</style>

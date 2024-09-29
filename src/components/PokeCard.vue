@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ITypes } from '@/interfaces/pokedex.interface';
 import { getTypeColor } from '@/utils/global';
+import PokemonTypes from './PokemonTypes.vue';
 
 defineProps<{
   name: string;
@@ -18,16 +19,7 @@ defineProps<{
 
     <h2 class="name">{{ name }}</h2>
 
-    <div class="types">
-      <span
-        v-for="type in types"
-        :key="type.type.name"
-        class="type"
-        :style="`background: ${getTypeColor(type.type.name)}`"
-      >
-        {{ type.type.name }}
-      </span>
-    </div>
+    <PokemonTypes :types="types" />
   </article>
 </template>
 
@@ -65,16 +57,5 @@ defineProps<{
 
 .number {
   color: var(--grey-color);
-}
-
-.types {
-  display: flex;
-  gap: 8px;
-}
-
-.type {
-  color: var(--light-color);
-  border-radius: var(--border-radius-xs);
-  padding: 4px 8px;
 }
 </style>
