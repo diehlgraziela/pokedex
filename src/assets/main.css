@@ -37,6 +37,7 @@ html {
 body {
   background: var(--base-color);
   color: var(--dark-color);
+  transition: var(--transition);
   padding: 3rem;
 }
 

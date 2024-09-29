@@ -71,8 +71,18 @@ function getStatColor(value: number) {
 </template>
 
 <style scoped>
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cecece;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bebebe;
+}
+
 .drawer {
-  width: 40%;
+  min-width: 35%;
   height: 100vh;
   overflow: hidden;
 
@@ -80,6 +90,7 @@ function getStatColor(value: number) {
   box-shadow: var(--box-shadow-left);
   border-top-left-radius: var(--border-radius-xl);
   border-bottom-left-radius: var(--border-radius-xl);
+  transition: var(--transition);
 
   position: fixed;
   top: 0;
@@ -100,6 +111,7 @@ function getStatColor(value: number) {
   display: grid;
   place-content: center;
   gap: 8px;
+  height: 30%;
   text-align: center;
   text-transform: capitalize;
   color: var(--light-color);
@@ -111,10 +123,12 @@ function getStatColor(value: number) {
 }
 
 .details {
+  height: 70%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 1rem;
+  overflow-y: auto;
 }
 
 .types {
@@ -158,5 +172,27 @@ function getStatColor(value: number) {
 .evolution-image {
   width: 80px;
   height: 80px;
+}
+
+@media screen and (max-width: 960px) {
+  .drawer {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .drawer {
+    width: 90%;
+  }
+
+  .pokemon-sprite {
+    width: 120px;
+    height: 120px;
+  }
+
+  .evolution-image {
+    width: 70px;
+    height: 70px;
+  }
 }
 </style>
