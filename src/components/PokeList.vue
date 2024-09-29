@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import type { IPokemonDetails } from '@/interfaces/pokedex.interface';
+import { ref } from 'vue';
 import { usePokedexStore } from '@/stores/pokedex';
 import PokeCard from './PokeCard.vue';
 import PokemonDetails from './PokemonDetails.vue';
-import { ref } from 'vue';
+
+defineProps<{
+  pokemons: IPokemonDetails[];
+}>();
 
 const pokedexStore = usePokedexStore();
 const showDetails = ref<boolean>(false);
@@ -20,7 +24,7 @@ function openDetails(pokemon: IPokemonDetails) {
 <template>
   <div class="list">
     <PokeCard
-      v-for="pokemon in pokedexStore.allPokemons"
+      v-for="pokemon in pokemons"
       :key="pokemon.id"
       :name="pokemon.name"
       :number="pokemon.id"

@@ -80,11 +80,9 @@ a {
   color: inherit;
 }
 
-input,
-select {
+input {
   padding: 12px 16px;
   height: 60px;
-  margin-bottom: 1.5rem;
   border-radius: var(--border-radius-md);
   background: var(--light-color);
   box-shadow: var(--box-shadow-type-1);
@@ -92,8 +90,7 @@ select {
   border: none;
 }
 
-input:focus,
-select:focus {
+input:focus {
   outline: 1px solid var(--grey-color);
 }
 

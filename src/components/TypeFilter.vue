@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import type { TType } from '@/interfaces/pokedex.interface';
+import Multiselect from 'vue-multiselect';
 
-const selectedType = ref<TType | 'type'>('type');
+const selectedType = ref<TType>();
 
 const types = computed<TType[]>(() => [
   'bug',
@@ -28,36 +29,73 @@ const types = computed<TType[]>(() => [
 
 <template>
   <div class="select-container">
-    <select v-model="selectedType" name="types" id="types" class="select">
-      <option value="type" class="placeholder" disabled hidden selected>Tipo</option>
-      <option v-for="type in types" :key="type" :value="type" class="option">
-        {{ type.charAt(0).toUpperCase() + type.slice(1) }}
-      </option>
-    </select>
-    <button class="filter-icon">
+    <div class="select-input">
       <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
-    </button>
+      <span class="input-text">Tipo</span>
+      <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
+    </div>
+
+    <ul class="list-items" v-if="false">
+      <li class="item">
+        <span class="checkbox">
+          <i class="fa-solid fa-check check-icon"></i>
+        </span>
+        <span class="item-text">HTML & CSS</span>
+      </li>
+      <li class="item">
+        <span class="checkbox">
+          <i class="fa-solid fa-check check-icon"></i>
+        </span>
+        <span class="item-text">Bootstrap</span>
+      </li>
+      <li class="item">
+        <span class="checkbox">
+          <i class="fa-solid fa-check check-icon"></i>
+        </span>
+        <span class="item-text">JavaScript</span>
+      </li>
+      <li class="item">
+        <span class="checkbox">
+          <i class="fa-solid fa-check check-icon"></i>
+        </span>
+        <span class="item-text">Node.Js</span>
+      </li>
+      <li class="item">
+        <span class="checkbox">
+          <i class="fa-solid fa-check check-icon"></i>
+        </span>
+        <span class="item-text">React JS</span>
+      </li>
+      <li class="item">
+        <span class="checkbox">
+          <i class="fa-solid fa-check check-icon"></i>
+        </span>
+        <span class="item-text">Mango DB</span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <style scoped>
 .select-container {
   position: relative;
-  width: 20%;
+  height: 60px;
+  width: 25%;
 }
 
-.select {
-  width: 100%;
-  padding-left: 40px;
+.select-input {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  height: 60px;
+  border-radius: var(--border-radius-md);
+  background: var(--light-color);
+  box-shadow: var(--box-shadow-type-1);
+  color: var(--grey-lighter-color);
+  border: none;
 }
 
-.option {
-  color: var(--dark-color);
-}
-
-.filter-icon {
-  position: absolute;
-  left: 12px;
-  top: 15px;
+.input-text {
+  margin-left: 4px;
 }
 </style>

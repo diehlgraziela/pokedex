@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ITypes } from '@/interfaces/pokedex.interface';
-import { getTypeColor } from '@/utils/global';
 import PokemonTypes from './PokemonTypes.vue';
 
 defineProps<{
