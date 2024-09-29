@@ -30,6 +30,8 @@ const searchQuery = ref<string>('');
 }
 
 .search-icon {
+  background: var(--light-color);
+  padding-left: 8px;
   position: absolute;
   right: 16px;
   top: 15px;

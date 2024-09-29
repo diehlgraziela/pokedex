@@ -4,20 +4,38 @@ import PokeList from '@/components/PokeList.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import TypeFilter from '@/components/TypeFilter.vue';
 import { computed, ref } from 'vue';
+import type { IPokemonDetails, TType } from '@/interfaces/pokedex.interface';
 
 const pokedexStore = usePokedexStore();
 const searchQuery = ref<string>('');
+const selectedType = ref<TType[]>([]);
 
 const filteredPokemons = computed(() => {
-  return pokedexStore.allPokemons.filter(
-    (pokemon) =>
-      pokemon.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      pokemon.id.toString().includes(searchQuery.value),
-  );
+  return pokedexStore.allPokemons.filter((pokemon) => {
+    return matchesSearch(pokemon) && matchesType(pokemon);
+  });
 });
+
+function matchesSearch(pokemon: IPokemonDetails) {
+  const searchTerm = searchQuery.value.toLowerCase();
+  return (
+    pokemon.name.toLowerCase().includes(searchTerm) || pokemon.id.toString().includes(searchTerm)
+  );
+}
+
+function matchesType(pokemon: IPokemonDetails) {
+  if (selectedType.value.length == 0) return true;
+  return selectedType.value.some((selected) =>
+    pokemon.types.some((pokemonType) => pokemonType.type.name === selected),
+  );
+}
 
 function searchPokemon(value: string) {
   searchQuery.value = value;
+}
+
+function filterPokemon(type: TType[]) {
+  selectedType.value = type;
 }
 </script>
 
@@ -25,7 +43,7 @@ function searchPokemon(value: string) {
   <section class="home-section">
     <div class="filters">
       <SearchInput @search="searchPokemon" />
-      <TypeFilter />
+      <TypeFilter @click:type="filterPokemon" />
     </div>
 
     <PokeList :pokemons="filteredPokemons" />
@@ -39,8 +57,14 @@ function searchPokemon(value: string) {
 
 .filters {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 1rem;
   padding-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 960px) {
+  .filters {
+    flex-direction: column;
+  }
 }
 </style>

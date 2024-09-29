@@ -4,9 +4,9 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
-import { MdClose, BiSearch, LaFilterSolid } from 'oh-vue-icons/icons';
+import { MdClose, BiSearch, LaFilterSolid, BiChevronDown, HiCheck } from 'oh-vue-icons/icons';
 
-addIcons(MdClose, BiSearch, LaFilterSolid);
+addIcons(MdClose, BiSearch, LaFilterSolid, BiChevronDown, HiCheck);
 
 import App from './App.vue';
 import router from './router';

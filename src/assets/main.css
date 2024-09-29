@@ -5,7 +5,8 @@
   --dark-color: #1a1a1a;
   --light-color: #f5f5f5;
   --grey-color: #6b6b6b;
-  --grey-lighter-color: #a5a5a5;
+  --grey-2-color: #a5a5a5;
+  --grey-3-color: #cccccc;
   --dark-blue-color: #3c5aa6;
   --light-blue-color: #2a75bb;
   --yellow-color: #ffcb05;
@@ -86,16 +87,16 @@ input {
   border-radius: var(--border-radius-md);
   background: var(--light-color);
   box-shadow: var(--box-shadow-type-1);
-  color: var(--grey-lighter-color);
+  color: var(--grey-2-color);
   border: none;
 }
 
 input:focus {
-  outline: 1px solid var(--grey-color);
+  outline: 1px solid var(--grey-2-color);
 }
 
 input::placeholder {
-  color: var(--grey-lighter-color);
+  color: var(--grey-2-color);
 }
 
 button {

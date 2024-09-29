@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import type { TType } from '@/interfaces/pokedex.interface';
-import Multiselect from 'vue-multiselect';
 
-const selectedType = ref<TType>();
+const emit = defineEmits(['click:type']);
+
+const selectedTypes = ref<TType[]>([]);
+const showOptions = ref<boolean>(false);
 
 const types = computed<TType[]>(() => [
   'bug',
@@ -25,52 +27,34 @@ const types = computed<TType[]>(() => [
   'steel',
   'water',
 ]);
+
+function openOptions() {
+  showOptions.value = !showOptions.value;
+}
+
+function selectItem(type: TType) {
+  const index = selectedTypes.value.indexOf(type);
+  index === -1 ? selectedTypes.value.push(type) : selectedTypes.value.splice(index, 1);
+  emit('click:type', selectedTypes.value);
+}
 </script>
 
 <template>
   <div class="select-container">
-    <div class="select-input">
-      <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
-      <span class="input-text">Tipo</span>
-      <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
+    <div :class="['select-input', { active: showOptions }]" @click="openOptions">
+      <span class="input-text">
+        <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
+        {{ selectedTypes.join(', ') || 'Tipo' }}
+      </span>
+      <v-icon name="bi-chevron-down" scale="1" label="Seta" fill="grey"></v-icon>
     </div>
 
-    <ul class="list-items" v-if="false">
-      <li class="item">
-        <span class="checkbox">
-          <i class="fa-solid fa-check check-icon"></i>
-        </span>
-        <span class="item-text">HTML & CSS</span>
-      </li>
-      <li class="item">
-        <span class="checkbox">
-          <i class="fa-solid fa-check check-icon"></i>
-        </span>
-        <span class="item-text">Bootstrap</span>
-      </li>
-      <li class="item">
-        <span class="checkbox">
-          <i class="fa-solid fa-check check-icon"></i>
-        </span>
-        <span class="item-text">JavaScript</span>
-      </li>
-      <li class="item">
-        <span class="checkbox">
-          <i class="fa-solid fa-check check-icon"></i>
-        </span>
-        <span class="item-text">Node.Js</span>
-      </li>
-      <li class="item">
-        <span class="checkbox">
-          <i class="fa-solid fa-check check-icon"></i>
-        </span>
-        <span class="item-text">React JS</span>
-      </li>
-      <li class="item">
-        <span class="checkbox">
-          <i class="fa-solid fa-check check-icon"></i>
-        </span>
-        <span class="item-text">Mango DB</span>
+    <ul v-if="showOptions" class="types-list">
+      <li v-for="type in types" class="list-item" :key="type" @click="selectItem(type)">
+        <div class="checkbox">
+          <v-icon v-if="selectedTypes.includes(type)" name="hi-check" fill="#3c5aa6"></v-icon>
+        </div>
+        <span class="item-text">{{ type }}</span>
       </li>
     </ul>
   </div>
@@ -79,23 +63,67 @@ const types = computed<TType[]>(() => [
 <style scoped>
 .select-container {
   position: relative;
-  height: 60px;
+  min-height: 60px;
   width: 25%;
 }
 
 .select-input {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  height: 60px;
+  min-height: 60px;
+  height: auto;
   border-radius: var(--border-radius-md);
   background: var(--light-color);
   box-shadow: var(--box-shadow-type-1);
-  color: var(--grey-lighter-color);
+  color: var(--grey-2-color);
   border: none;
+}
+
+.select-input.active {
+  outline: 1px solid var(--grey-2-color);
 }
 
 .input-text {
   margin-left: 4px;
+}
+
+.types-list {
+  background: var(--light-color);
+  border-radius: var(--border-radius-xs);
+  box-shadow: var(--box-shadow-type-1);
+  max-height: 300px;
+  overflow: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.list-item:hover {
+  cursor: pointer;
+  background: var(--base-color);
+}
+
+.checkbox {
+  display: grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--grey-2-color);
+  border-radius: var(--border-radius-xs);
+}
+
+@media screen and (max-width: 960px) {
+  .select-container {
+    width: 100%;
+  }
 }
 </style>
