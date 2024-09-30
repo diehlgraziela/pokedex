@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import {
   fetchPokemons,
   fetchPokemonDetails,
@@ -12,6 +12,7 @@ import type { IEvolutions, INameImage } from '@/interfaces/evolutions.interface'
 export const usePokedexStore = defineStore('pokedex', () => {
   const allPokemons = ref<IPokemonDetails[]>([]);
   const evolutions = ref<IEvolutions>({} as IEvolutions);
+  const favorites = ref<string[]>([]);
 
   async function getPokemonsList(offset?: number): Promise<void> {
     try {
@@ -69,5 +70,24 @@ export const usePokedexStore = defineStore('pokedex', () => {
     }
   }
 
-  return { allPokemons, getPokemonsList, getPokemonEvolutions, evolutions };
+  function addPokemonToFavorites(name: string): void {
+    const index = favorites.value.indexOf(name);
+    index === -1 ? favorites.value.push(name) : favorites.value.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites.value));
+  }
+
+  onMounted(() => {
+    if (localStorage.getItem('favorites')) {
+      favorites.value = JSON.parse(localStorage.getItem('favorites')!);
+    }
+  });
+
+  return {
+    allPokemons,
+    getPokemonsList,
+    getPokemonEvolutions,
+    evolutions,
+    addPokemonToFavorites,
+    favorites,
+  };
 });

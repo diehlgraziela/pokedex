@@ -17,9 +17,9 @@ const filteredPokemons = computed(() => {
 });
 
 function matchesSearch(pokemon: IPokemonDetails) {
-  const searchTerm = searchQuery.value.toLowerCase();
   return (
-    pokemon.name.toLowerCase().includes(searchTerm) || pokemon.id.toString().includes(searchTerm)
+    pokemon.name.toLowerCase().includes(searchQuery.value) ||
+    pokemon.id.toString().includes(searchQuery.value)
   );
 }
 
@@ -31,7 +31,7 @@ function matchesType(pokemon: IPokemonDetails) {
 }
 
 function searchPokemon(value: string) {
-  searchQuery.value = value;
+  searchQuery.value = value.toLowerCase();
 }
 
 function filterPokemon(type: TType[]) {

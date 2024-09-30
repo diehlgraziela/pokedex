@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* TODO - CLOSE MENU ON CLICK OUTSIDE */
 import { computed, ref } from 'vue';
 import type { TType } from '@/interfaces/pokedex.interface';
 

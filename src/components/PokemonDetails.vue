@@ -3,22 +3,58 @@ import type { IPokemonDetails } from '@/interfaces/pokedex.interface';
 import { usePokedexStore } from '@/stores/pokedex';
 import { getTypeColor } from '@/utils/global';
 import PokemonTypes from './PokemonTypes.vue';
+import { computed, onMounted, ref, watch } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   pokemon: IPokemonDetails;
 }>();
-
+const emit = defineEmits(['click:close']);
 const pokedexStore = usePokedexStore();
+const favorite = ref<boolean>(false);
+
+const isPokemonFavorite = computed<boolean>(() =>
+  pokedexStore.favorites.some((name) => name === props.pokemon.name),
+);
+
+watch(
+  () => props.pokemon.name,
+  () => {
+    favorite.value = isPokemonFavorite.value;
+  },
+);
+
+onMounted(() => {
+  favorite.value = isPokemonFavorite.value;
+});
 
 function getStatColor(value: number) {
   return value < 50 ? '#ff470f' : value <= 65 ? '#ffbf0f' : '#09db33';
+}
+
+function toggleFavorite() {
+  favorite.value = !favorite.value;
+  pokedexStore.addPokemonToFavorites(props.pokemon.name);
+}
+
+function closeDrawer() {
+  favorite.value = false;
+  emit('click:close');
 }
 </script>
 
 <template>
   <section class="drawer">
-    <button class="close" @click="$emit('click:close')">
-      <v-icon name="md-close" scale="1.5" label="Fechar"></v-icon>
+    <button class="close" @click="closeDrawer">
+      <v-icon name="md-close" scale="1.5" label="Fechar" fill="white"></v-icon>
+    </button>
+    <button class="add-to-favorite">
+      <v-icon
+        scale="1.5"
+        fill="white"
+        :label="favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
+        :name="favorite ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart'"
+        @click="toggleFavorite"
+      ></v-icon>
     </button>
 
     <header class="header" :style="`background: ${getTypeColor(pokemon.types[0].type.name)}`">
@@ -118,8 +154,8 @@ function getStatColor(value: number) {
 }
 
 .pokemon-sprite {
-  width: 150px;
-  height: 150px;
+  max-width: 130px;
+  max-height: 130px;
 }
 
 .details {
@@ -172,6 +208,15 @@ function getStatColor(value: number) {
 .evolution-image {
   width: 80px;
   height: 80px;
+}
+
+.add-to-favorite {
+  position: absolute;
+  top: 1rem;
+  right: 3rem;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 @media screen and (max-width: 960px) {
