@@ -12,7 +12,7 @@ import type { IEvolutions, INameImage } from '@/interfaces/evolutions.interface'
 export const usePokedexStore = defineStore('pokedex', () => {
   const allPokemons = ref<IPokemonDetails[]>([]);
   const evolutions = ref<IEvolutions>({} as IEvolutions);
-  const favorites = ref<string[]>([]);
+  const favorites = ref<IPokemonDetails[]>([]);
 
   async function getPokemonsList(offset?: number): Promise<void> {
     try {
@@ -70,9 +70,9 @@ export const usePokedexStore = defineStore('pokedex', () => {
     }
   }
 
-  function addPokemonToFavorites(name: string): void {
-    const index = favorites.value.indexOf(name);
-    index === -1 ? favorites.value.push(name) : favorites.value.splice(index, 1);
+  function addPokemonToFavorites(pokemon: IPokemonDetails): void {
+    const index = favorites.value.indexOf(pokemon);
+    index === -1 ? favorites.value.push(pokemon) : favorites.value.splice(index, 1);
     localStorage.setItem('favorites', JSON.stringify(favorites.value));
   }
 

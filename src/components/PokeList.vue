@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IPokemonDetails } from '@/interfaces/pokedex.interface';
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import { usePokedexStore } from '@/stores/pokedex';
 import PokeCard from './PokeCard.vue';
 import PokemonDetails from './PokemonDetails.vue';
@@ -19,6 +19,10 @@ function openDetails(pokemon: IPokemonDetails) {
 
   pokedexStore.getPokemonEvolutions(pokemon.id);
 }
+
+onUnmounted(() => {
+  showDetails.value = false;
+});
 </script>
 
 <template>

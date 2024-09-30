@@ -13,7 +13,7 @@ const pokedexStore = usePokedexStore();
 const favorite = ref<boolean>(false);
 
 const isPokemonFavorite = computed<boolean>(() =>
-  pokedexStore.favorites.some((name) => name === props.pokemon.name),
+  pokedexStore.favorites.some((favorite) => favorite.name === props.pokemon.name),
 );
 
 watch(
@@ -33,7 +33,7 @@ function getStatColor(value: number) {
 
 function toggleFavorite() {
   favorite.value = !favorite.value;
-  pokedexStore.addPokemonToFavorites(props.pokemon.name);
+  pokedexStore.addPokemonToFavorites(props.pokemon);
 }
 
 function closeDrawer() {

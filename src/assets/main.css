@@ -102,6 +102,12 @@ input::placeholder {
 button {
   background: none;
   border: none;
+  transition: var(--transition);
+}
+
+button:hover {
+  cursor: pointer;
+  filter: brightness(0.92);
 }
 
 .text-center {
