@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const searchQuery = ref<string>('');
 </script>
 
@@ -9,8 +11,8 @@ const searchQuery = ref<string>('');
     <input
       v-model="searchQuery"
       type="text"
-      placeholder="Pesquise o nome ou número de um pokémon..."
       class="search"
+      :placeholder="t('search')"
       @input="$emit('search', searchQuery)"
     />
     <button class="search-icon">

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+import LanguageMenu from './LanguageMenu.vue';
 
 const router = useRouter();
 
@@ -28,6 +29,8 @@ const navOptions = computed(() => [
         {{ nav.text }}
       </li>
     </ul>
+
+    <LanguageMenu />
   </header>
 </template>
 
@@ -36,9 +39,14 @@ const navOptions = computed(() => [
   width: 100%;
   height: 80px;
   margin: 3rem 0;
+  padding: 0 3rem;
   background: var(--light-color);
   box-shadow: var(--box-shadow-type-2);
   border-radius: var(--border-radius-md);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-items {

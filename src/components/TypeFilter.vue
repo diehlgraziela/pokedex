@@ -1,12 +1,13 @@
 <script setup lang="ts">
-/* TODO - CLOSE MENU ON CLICK OUTSIDE */
 import { computed, ref } from 'vue';
 import type { TType } from '@/interfaces/pokedex.interface';
+import useClickOutside from '@/composables/useClickOutside';
 
 const emit = defineEmits(['click:type']);
 
 const selectedTypes = ref<TType[]>([]);
 const showOptions = ref<boolean>(false);
+const filterRef = ref();
 
 const types = computed<TType[]>(() => [
   'bug',
@@ -29,7 +30,7 @@ const types = computed<TType[]>(() => [
   'water',
 ]);
 
-function openOptions() {
+function toggleOptions() {
   showOptions.value = !showOptions.value;
 }
 
@@ -38,11 +39,15 @@ function selectItem(type: TType) {
   index === -1 ? selectedTypes.value.push(type) : selectedTypes.value.splice(index, 1);
   emit('click:type', selectedTypes.value);
 }
+
+useClickOutside(filterRef, () => {
+  showOptions.value = false;
+});
 </script>
 
 <template>
-  <div class="select-container">
-    <div :class="['select-input', { active: showOptions }]" @click="openOptions">
+  <div class="select-container" ref="filterRef">
+    <div :class="['select-input', { active: showOptions }]" @click="toggleOptions">
       <span class="input-text">
         <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
         {{ selectedTypes.join(', ') || 'Tipo' }}
