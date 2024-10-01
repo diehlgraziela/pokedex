@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useSnackbarStore } from './snackbar';
 import { onMounted, ref } from 'vue';
 import {
   fetchPokemons,
@@ -10,6 +11,7 @@ import type { IPokemonDetails, INameUrl } from '@/interfaces/pokedex.interface';
 import type { IEvolutions, INameImage } from '@/interfaces/evolutions.interface';
 
 export const usePokedexStore = defineStore('pokedex', () => {
+  const snackbarStore = useSnackbarStore();
   const allPokemons = ref<IPokemonDetails[]>([]);
   const evolutions = ref<IEvolutions>({} as IEvolutions);
   const favorites = ref<IPokemonDetails[]>([]);
@@ -20,6 +22,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
 
       await getPokemonsDetailsList(response.data.results);
     } catch (error: any) {
+      snackbarStore.showSnackbar('Ocorreu um erro ao listar os pokémons!', 'error');
       throw new Error(error);
     }
   }
@@ -32,6 +35,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
         allPokemons.value = [...allPokemons.value, response.data];
       }
     } catch (error: any) {
+      snackbarStore.showSnackbar('Ocorreu um erro ao listar os pokémons!', 'error');
       throw new Error(error);
     }
   }
@@ -44,6 +48,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
         image: pokemon.data.sprites.other['official-artwork'].front_default,
       };
     } catch (error: any) {
+      snackbarStore.showSnackbar('Ocorreu um erro ao listar as evoluções!', 'error');
       throw new Error(error);
     }
   }
@@ -66,6 +71,7 @@ export const usePokedexStore = defineStore('pokedex', () => {
         }
       }
     } catch (error: any) {
+      snackbarStore.showSnackbar('Ocorreu um erro ao listar as evoluções!', 'error');
       throw new Error(error);
     }
   }

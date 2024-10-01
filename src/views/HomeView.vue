@@ -18,6 +18,7 @@ const filteredPokemons = computed(() => {
 
 function loadMorePokemons() {
   pokedexStore.getPokemonsList(offset.value);
+  offset.value += 12;
 }
 </script>
 

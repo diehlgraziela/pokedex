@@ -7,7 +7,6 @@ export default function useClickOutside(component: Ref, callback: Function) {
   }
 
   const clickOutside = (event: MouseEvent) => {
-    console.log('click');
     if (event.target === component.value || event.composedPath().includes(component.value)) {
       return;
     }
@@ -21,7 +20,6 @@ export default function useClickOutside(component: Ref, callback: Function) {
   });
 
   onBeforeUnmount(() => {
-    console.log('unmount');
     window.removeEventListener('click', clickOutside);
   });
 }
