@@ -15,8 +15,10 @@ export const usePokedexStore = defineStore('pokedex', () => {
   const allPokemons = ref<IPokemonDetails[]>([]);
   const evolutions = ref<IEvolutions>({} as IEvolutions);
   const favorites = ref<IPokemonDetails[]>([]);
+  const isLoadingPokemons = ref<boolean>(false);
 
   async function getPokemonsList(offset?: number): Promise<void> {
+    isLoadingPokemons.value = true;
     try {
       const response = await fetchPokemons(offset);
 
@@ -24,6 +26,8 @@ export const usePokedexStore = defineStore('pokedex', () => {
     } catch (error: any) {
       snackbarStore.showSnackbar('Ocorreu um erro ao listar os pokémons!', 'error');
       throw new Error(error);
+    } finally {
+      isLoadingPokemons.value = false;
     }
   }
 
@@ -95,5 +99,6 @@ export const usePokedexStore = defineStore('pokedex', () => {
     evolutions,
     addPokemonToFavorites,
     favorites,
+    isLoadingPokemons,
   };
 });
