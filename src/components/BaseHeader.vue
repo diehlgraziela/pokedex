@@ -89,7 +89,15 @@ const navOptions = computed(() => [
 
 @media screen and (max-width: 600px) {
   .header {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .header-item {
+    padding: 0 8px;
+  }
+
+  .header-icons {
+    gap: 0.5rem;
   }
 }
 </style>

@@ -35,5 +35,5 @@ export const useFiltersStore = defineStore('filters', () => {
     selectedType.value = [];
   });
 
-  return { matchesSearch, matchesType, searchPokemon, filterPokemon };
+  return { matchesSearch, matchesType, searchPokemon, filterPokemon, searchQuery };
 });

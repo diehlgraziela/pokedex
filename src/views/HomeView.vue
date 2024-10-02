@@ -31,7 +31,7 @@ function loadMorePokemons() {
 
     <PokeList :pokemons="filteredPokemons" />
 
-    <div class="see-more-container">
+    <div v-if="!filtersStore.searchQuery" class="see-more-container">
       <button class="see-more" @click="loadMorePokemons">+</button>
     </div>
   </section>
