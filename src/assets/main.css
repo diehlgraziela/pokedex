@@ -126,4 +126,8 @@ button:hover {
   html {
     font-size: 16px;
   }
+
+  body {
+    padding: 0 1.5rem;
+  }
 }

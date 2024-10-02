@@ -23,7 +23,8 @@ const filteredPokemons = computed(() => {
       <TypeFilter @click:type="filtersStore.filterPokemon" />
     </div>
 
-    <PokeList :pokemons="filteredPokemons" />
+    <p v-if="filteredPokemons.length == 0" class="text-center">Não há pokémons favoritos.</p>
+    <PokeList v-else :pokemons="filteredPokemons" />
   </section>
 </template>
 

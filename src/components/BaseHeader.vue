@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import LanguageMenu from './LanguageMenu.vue';
 
+const { t } = useI18n();
 const router = useRouter();
 
 const navOptions = computed(() => [
   {
     name: 'home',
-    text: 'Pokédex',
+    text: t('pokedex'),
   },
   {
     name: 'favorites',
-    text: 'Favoritos',
+    text: t('favorites'),
   },
 ]);
 </script>
@@ -69,5 +71,11 @@ const navOptions = computed(() => [
 .header-item.active {
   border-bottom: 4px solid var(--dark-blue-color);
   color: var(--dark-blue-color);
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 0 1.5rem;
+  }
 }
 </style>

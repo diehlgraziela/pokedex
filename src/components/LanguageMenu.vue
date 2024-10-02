@@ -3,17 +3,17 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import useClickOutside from '@/composables/useClickOutside';
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const showMenu = ref<boolean>(false);
 const languagesRef = ref();
 
 const languages = computed(() => [
   {
-    title: 'Português',
+    title: t('portuguese'),
     value: 'pt',
   },
   {
-    title: 'Inglês',
+    title: t('english'),
     value: 'en',
   },
 ]);
@@ -38,9 +38,9 @@ useClickOutside(languagesRef, () => {
       <v-icon
         @click="toggleLanguageMenu"
         name="md-language-outlined"
-        label="Idioma"
         fill="grey"
         scale="1.5"
+        :label="t('language')"
       ></v-icon>
     </button>
 

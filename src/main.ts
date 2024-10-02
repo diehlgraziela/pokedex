@@ -31,9 +31,7 @@ addIcons(
 import App from './App.vue';
 import router from './router';
 
-const app = createApp(App);
-
-const i18n = createI18n({
+export const i18n = createI18n({
   locale: 'pt',
   fallbackLocale: 'pt',
   messages: {
@@ -41,6 +39,8 @@ const i18n = createI18n({
     en,
   },
 });
+
+const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);

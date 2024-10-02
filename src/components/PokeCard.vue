@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ITypes } from '@/interfaces/pokedex.interface';
+import { useI18n } from 'vue-i18n';
 import PokemonTypes from './PokemonTypes.vue';
 
 defineProps<{
@@ -8,13 +9,15 @@ defineProps<{
   image: string;
   types: ITypes[];
 }>();
+
+const { t } = useI18n();
 </script>
 
 <template>
   <article class="card">
     <small class="number">Nº {{ number }}</small>
 
-    <img class="image" :src="image" alt="Imagem pokémon" />
+    <img class="image" :src="image" :alt="t('pokemon-image')" />
 
     <h2 class="name">{{ name }}</h2>
 

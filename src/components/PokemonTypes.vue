@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ITypes } from '@/interfaces/pokedex.interface';
-import { getTypeColor } from '@/utils/global';
+import { getTypeColor, getTypeText } from '@/utils/global';
 
 defineProps<{
   types: ITypes[];
@@ -15,7 +15,7 @@ defineProps<{
       :style="`background: ${getTypeColor(type.type.name)}`"
       class="type"
     >
-      {{ type.type.name }}
+      {{ getTypeText(type.type.name) }}
     </span>
   </div>
 </template>

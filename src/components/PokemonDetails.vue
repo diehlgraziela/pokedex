@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IPokemonDetails } from '@/interfaces/pokedex.interface';
 import { usePokedexStore } from '@/stores/pokedex';
+import { useI18n } from 'vue-i18n';
 import { getTypeColor } from '@/utils/global';
 import PokemonTypes from './PokemonTypes.vue';
 import { computed, onMounted, ref, watch } from 'vue';
@@ -9,6 +10,7 @@ const props = defineProps<{
   pokemon: IPokemonDetails;
 }>();
 const emit = defineEmits(['click:close']);
+const { t } = useI18n();
 const pokedexStore = usePokedexStore();
 const favorite = ref<boolean>(false);
 
@@ -51,7 +53,7 @@ function closeDrawer() {
       <v-icon
         scale="1.5"
         fill="white"
-        :label="favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
+        :label="favorite ? t('remove-from-favorites') : t('add-to-favorites')"
         :name="favorite ? 'bi-bookmark-heart-fill' : 'bi-bookmark-heart'"
         @click="toggleFavorite"
       ></v-icon>
@@ -72,7 +74,7 @@ function closeDrawer() {
       <PokemonTypes :types="pokemon.types" class="types" />
 
       <div class="stats">
-        <h4 class="text-center">Estatísticas</h4>
+        <h4 class="text-center">{{ t('statistics') }}</h4>
         <ul class="stats-list">
           <li v-for="stat in pokemon.stats" :key="stat.stat.name" class="stats-item">
             <span class="stat-name">{{ stat.stat.name }}</span>
@@ -90,7 +92,7 @@ function closeDrawer() {
       </div>
 
       <div class="evolutions">
-        <h4 class="text-center">Evoluções</h4>
+        <h4 class="text-center">{{ t('evolutions') }}</h4>
         <ul class="evolutions-list">
           <li
             v-for="evolution in pokedexStore.evolutions"
@@ -227,7 +229,8 @@ function closeDrawer() {
 
 @media screen and (max-width: 600px) {
   .drawer {
-    width: 90%;
+    width: 100%;
+    border-radius: 0;
   }
 
   .pokemon-sprite {

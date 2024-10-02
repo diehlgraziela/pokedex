@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useSnackbarStore } from '@/stores/snackbar';
 
 const props = defineProps<{
@@ -8,8 +9,8 @@ const props = defineProps<{
   timeout?: number;
   persistent?: boolean;
 }>();
-
 const snackbarStore = useSnackbarStore();
+const { t } = useI18n();
 
 const snackbarColor = computed(() => {
   switch (props.type) {
@@ -39,7 +40,7 @@ onMounted(() => {
   <div class="snackbar" :style="`background: ${snackbarColor}`">
     {{ message }}
     <button @click="$emit('click:close')">
-      <v-icon name="md-close" scale="1" label="Fechar" fill="white"></v-icon>
+      <v-icon name="md-close" scale="1" fill="white" :label="t('close')"></v-icon>
     </button>
   </div>
 </template>

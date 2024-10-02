@@ -2,8 +2,10 @@
 import { computed, ref } from 'vue';
 import type { TType } from '@/interfaces/pokedex.interface';
 import useClickOutside from '@/composables/useClickOutside';
+import { useI18n } from 'vue-i18n';
 
 const emit = defineEmits(['click:type']);
+const { t } = useI18n();
 
 const selectedTypes = ref<TType[]>([]);
 const showOptions = ref<boolean>(false);
@@ -50,7 +52,7 @@ useClickOutside(filterRef, () => {
     <div :class="['select-input', { active: showOptions }]" @click="toggleOptions">
       <span class="input-text">
         <v-icon name="la-filter-solid" scale="1.5" label="Filtro" fill="grey"></v-icon>
-        {{ selectedTypes.join(', ') || 'Tipo' }}
+        {{ selectedTypes.join(', ') || t('type') }}
       </span>
       <v-icon name="bi-chevron-down" scale="1" label="Seta" fill="grey"></v-icon>
     </div>

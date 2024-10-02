@@ -16,7 +16,7 @@ const searchQuery = ref<string>('');
       @input="$emit('search', searchQuery)"
     />
     <button class="search-icon">
-      <v-icon name="bi-search" scale="1.5" label="Lupa" fill="grey"></v-icon>
+      <v-icon name="bi-search" scale="1.5" fill="grey" :label="t('search')"></v-icon>
     </button>
   </div>
 </template>
