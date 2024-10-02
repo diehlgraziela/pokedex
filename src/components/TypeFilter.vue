@@ -106,6 +106,7 @@ useClickOutside(filterRef, () => {
   position: absolute;
   top: 100%;
   width: 100%;
+  z-index: 9;
 }
 
 .list-item {

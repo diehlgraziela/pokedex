@@ -15,6 +15,8 @@ import {
   BiBookmarkHeart,
   BiBookmarkHeartFill,
   MdLanguageOutlined,
+  FaRegularMoon,
+  HiSun,
 } from 'oh-vue-icons/icons';
 
 addIcons(
@@ -26,6 +28,8 @@ addIcons(
   BiBookmarkHeart,
   BiBookmarkHeartFill,
   MdLanguageOutlined,
+  FaRegularMoon,
+  HiSun,
 );
 
 import App from './App.vue';

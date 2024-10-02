@@ -27,7 +27,7 @@ defineProps<{
 }
 
 .type {
-  color: var(--light-color);
+  color: #f5f5f5;
   border-radius: var(--border-radius-xs);
   padding: 4px 8px;
 }

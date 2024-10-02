@@ -45,7 +45,7 @@ const { t } = useI18n();
 
 .card:hover {
   cursor: pointer;
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--grey-3-color);
 }
 
 .image {

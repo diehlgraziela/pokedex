@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import LanguageMenu from './LanguageMenu.vue';
+import ToggleTheme from './ToggleTheme.vue';
 
 const { t } = useI18n();
 const router = useRouter();
@@ -21,7 +22,7 @@ const navOptions = computed(() => [
 
 <template>
   <header class="header">
-    <ul class="header-items">
+    <ul class="header-navigation">
       <li
         v-for="nav in navOptions"
         :class="['header-item', { active: router.currentRoute.value.name === nav.name }]"
@@ -32,7 +33,14 @@ const navOptions = computed(() => [
       </li>
     </ul>
 
-    <LanguageMenu />
+    <ul class="header-icons">
+      <li>
+        <ToggleTheme />
+      </li>
+      <li>
+        <LanguageMenu />
+      </li>
+    </ul>
   </header>
 </template>
 
@@ -43,7 +51,7 @@ const navOptions = computed(() => [
   margin: 3rem 0;
   padding: 0 3rem;
   background: var(--light-color);
-  box-shadow: var(--box-shadow-type-2);
+  box-shadow: var(--box-shadow-type-1);
   border-radius: var(--border-radius-md);
 
   display: flex;
@@ -51,7 +59,8 @@ const navOptions = computed(() => [
   align-items: center;
 }
 
-.header-items {
+.header-navigation,
+.header-icons {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -71,6 +80,11 @@ const navOptions = computed(() => [
 .header-item.active {
   border-bottom: 4px solid var(--dark-blue-color);
   color: var(--dark-blue-color);
+}
+
+.header-icons {
+  align-items: center;
+  gap: 1rem;
 }
 
 @media screen and (max-width: 600px) {
