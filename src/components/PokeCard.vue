@@ -14,7 +14,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <article class="card">
+  <div class="card">
     <small class="number">Nº {{ number }}</small>
 
     <img class="image" :src="image" :alt="t('pokemon-image')" />
@@ -22,7 +22,7 @@ const { t } = useI18n();
     <h2 class="name">{{ name }}</h2>
 
     <PokemonTypes :types="types" />
-  </article>
+  </div>
 </template>
 
 <style scoped>

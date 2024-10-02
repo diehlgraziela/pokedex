@@ -30,6 +30,7 @@ function loadMorePokemons() {
     </div>
 
     <PokeList :pokemons="filteredPokemons" />
+
     <div class="see-more-container">
       <button class="see-more" @click="loadMorePokemons">+</button>
     </div>

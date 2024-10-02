@@ -26,7 +26,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="list">
+  <TransitionGroup name="list" tag="div" class="list">
     <PokeCard
       v-for="pokemon in pokemons"
       :key="pokemon.id"
@@ -36,7 +36,7 @@ onUnmounted(() => {
       :types="pokemon.types"
       @click="openDetails(pokemon)"
     ></PokeCard>
-  </div>
+  </TransitionGroup>
 
   <Transition name="slide-fade">
     <PokemonDetails
@@ -66,6 +66,16 @@ onUnmounted(() => {
 .slide-fade-leave-to {
   transform: translateX(40%);
   opacity: 0;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.6s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 
 @media screen and (max-width: 960px) {

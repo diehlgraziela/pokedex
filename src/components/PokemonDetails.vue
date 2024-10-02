@@ -109,16 +109,6 @@ function closeDrawer() {
 </template>
 
 <style scoped>
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background: #cecece;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #bebebe;
-}
-
 .drawer {
   min-width: 35%;
   height: 100vh;
@@ -224,6 +214,11 @@ function closeDrawer() {
 @media screen and (max-width: 960px) {
   .drawer {
     width: 60%;
+  }
+
+  .pokemon-sprite {
+    width: 120px;
+    height: 120px;
   }
 }
 
