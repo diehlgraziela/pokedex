@@ -1,6 +1,7 @@
 # Pokédex
 
 Preview do projeto em https://pokedex-graziela-diehl.netlify.app/
+
 Pokédex responsiva com as funcionalidades de:
 - Listar pokémons;
 - Exibir detalhes (incluindo estatísticas, tipos e evoluções) do pokémon;
